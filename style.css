@@ -1,0 +1,382 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top center, rgba(255, 50, 50, 0.18), transparent 25%),
+                linear-gradient(180deg, #05070d 0%, #0e0f19 40%, #0b0812 100%);
+    color: #188181;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+html {
+    font-size: 120%;
+}
+
+h1, h2, h3 {
+    color: #188181;
+    letter-spacing: 0.08em;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 18px rgba(255, 40, 40, 0.3);
+}
+
+#hud {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+}
+
+#statsPanel, #questPanel, #logPanel, #weeklyPanel {
+    background: rgba(255, 255, 255, 0.08);
+    border: 3px solid rgba(134, 21, 44, 0.92);
+    box-shadow: 0 0 38px rgba(134, 21, 44, 0.28);
+    border-radius: 24px;
+}
+
+#statsPanel, #questPanel, #logPanel {
+    flex: 1;
+    padding: 18px;
+    text-align: center;
+}
+
+#weeklyPanel {
+    width: 100%;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#statGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+}
+
+.statItem {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 20px;
+}
+
+.statItemHeader {
+    margin-bottom: 8px;
+    font-size: 1.05em;
+}
+
+.dailySummaryPanel {
+    margin-top: 16px;
+    padding: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 20px;
+    text-align: left;
+}
+
+.dailySummaryPanel h3 {
+    margin: 0 0 8px;
+    font-size: 1rem;
+}
+
+.dailySummaryPanel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.dailySummaryPanel li {
+    font-size: 0.95rem;
+}
+
+.subStatList {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 0.95em;
+}
+
+.subStat {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 5px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+#xpBarContainer {
+    width: 100%;
+    height: 16px;
+    border-radius: 999px;
+    border: 3px solid rgba(134, 21, 44, 0.8);
+    background: rgba(255, 255, 255, 0.04);
+    margin-top: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 18px rgba(134, 21, 44, 0.2);
+}
+
+#xpBar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff3b3b 0%, #ffbc42 100%);
+    transition: width 0.25s ease;
+}
+
+#titleDisplay {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    color: #188181;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
+#accountIcon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.25);
+    z-index: 25;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+#accountIcon:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.14);
+}
+
+#accountPopup {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    width: 280px;
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.94);
+    border: 3px solid rgba(134, 21, 44, 0.92);
+    box-shadow: 0 10px 32px rgba(134, 21, 44, 0.2);
+    border-radius: 18px;
+    display: none;
+    z-index: 24;
+}
+
+#accountPopup.open {
+    display: block;
+}
+
+#accountPopup .popupHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    color: #188181;
+    font-weight: 600;
+}
+
+#accountPopup button {
+    width: 32px;
+    height: 32px;
+    border-radius: 12px;
+    border: 1px solid rgba(134, 21, 44, 0.6);
+    background: rgba(255, 255, 255, 0.9);
+    color: #188181;
+    cursor: pointer;
+}
+
+#accountPopup label {
+    display: block;
+    margin-bottom: 8px;
+    color: #188181;
+    font-size: 0.95rem;
+}
+
+#playerNameInput {
+    width: 100%;
+    border: 1px solid rgba(134, 21, 44, 0.7);
+    border-radius: 14px;
+    padding: 10px 12px;
+    background: #ffffff;
+    color: #188181;
+    outline: none;
+}
+
+#playerNameInput:focus {
+    border-color: rgba(255, 90, 90, 0.8);
+    box-shadow: 0 0 14px rgba(255, 90, 90, 0.18);
+}
+
+.resetRow {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 18px;
+    color: #188181;
+    font-size: 0.98rem;
+}
+
+.resetRow strong {
+    color: #188181;
+    letter-spacing: 0.04em;
+}
+
+.statRow {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.statRow p {
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+button {
+    background: rgba(255, 25, 25, 0.12);
+    color: #188181;
+    border: 1px solid rgba(255, 25, 25, 0.55);
+    padding: 10px 14px;
+    margin: 4px 0;
+    cursor: pointer;
+    border-radius: 14px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 0 18px rgba(255, 70, 70, 0.22);
+    background: rgba(255, 25, 25, 0.18);
+}
+
+.questCategoryGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.questPagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.questPageInfo {
+    color: #188181;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.questNavBtn {
+    padding: 6px 10px;
+    min-width: 38px;
+}
+
+.questNavBtn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.questCategory {
+    border: 3px solid rgba(134, 21, 44, 0.85);
+    background: rgba(255, 255, 255, 0.03);
+    padding: 14px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    box-shadow: 0 0 18px rgba(134, 21, 44, 0.24);
+}
+
+.questCategory.healthy-life-choices {
+    width: 100%;
+    grid-column: 1 / -1;
+}
+
+.questCategory h3 {
+    margin: 0 0 10px;
+    font-size: 1rem;
+}
+
+.questGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.questBtn {
+    width: 100%;
+    min-height: 48px;
+    text-align: center;
+    font-size: 0.95em;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 0;
+    border-radius: 16px;
+}
+
+button:disabled {
+    opacity: 0.55;
+    cursor: default;
+}
+
+.weeklyQuest {
+    margin-bottom: 18px;
+    padding: 16px;
+    border: 1px solid rgba(255, 45, 45, 0.18);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.weeklyReward {
+    font-size: 0.95em;
+    color: #188181;
+    margin-top: 8px;
+}
+
+.weeklyStatus {
+    font-size: 0.92em;
+    margin-top: 6px;
+    color: #188181;
+}
+
+.weeklyBar {
+    width: 100%;
+    height: 14px;
+    border: 1px solid rgba(255, 60, 60, 0.32);
+    margin: 10px 0;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.weeklyProgress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ff2238 0%, #ff9b39 100%);
+    transition: width 0.25s ease;
+}
+
+#logPanel {
+    margin-top: 20px;
+}
