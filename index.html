@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hunter System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>SOLO LEVELING: HUNTER SYSTEM</h1>
+
+<div id="accountIcon" title="Change Hunter Name">👤</div>
+<div id="accountPopup">
+    <div class="popupHeader">
+        <span>Account</span>
+        <button id="closeAccountPopup" type="button">×</button>
+    </div>
+    <label for="accountSelect">Active Hunter</label>
+    <select id="accountSelect"></select>
+
+    <label for="playerNameInput">Hunter Name</label>
+    <input id="playerNameInput" type="text" placeholder="Enter your name" maxlength="20">
+
+    <label for="newAccountInput">Create New Hunter</label>
+    <input id="newAccountInput" type="text" placeholder="New hunter name" maxlength="20">
+
+    <div class="accountActions">
+        <button id="createAccountButton" type="button">Create Account</button>
+    </div>
+</div>
+
+<div id="hud">
+
+    <!-- ===================== STATS PANEL ===================== -->
+    <div id="statsPanel">
+        <h2>STATS</h2>
+
+        <div class="statRow">
+            <p>Name: <span id="playerNameDisplay">Hunter</span></p>
+            <p>Level: <span id="levelDisplay">1</span></p>
+        </div>
+        <div class="statRow">
+            <p>Rank: <span id="rankDisplay">E</span></p>
+            <p>Title: <span id="titleDisplay">Novice Hunter</span></p>
+        </div>
+
+        <div id="xpBarContainer">
+            <div id="xpBar"></div>
+        </div>
+
+        <p>XP: <span id="xpDisplay">0</span> / <span id="xpMaxDisplay">100</span></p>
+
+        <div id="statGrid">
+
+            <div class="statItem">
+                <div class="statItemHeader"><strong>Body:</strong> <span id="bodyDisplay">0</span></div>
+                <div class="subStatList">
+                    <div class="subStat"><span>Strength</span><span id="bodyStrengthDisplay">0</span></div>
+                    <div class="subStat"><span>Endurance</span><span id="bodyEnduranceDisplay">0</span></div>
+                    <div class="subStat"><span>Agility</span><span id="bodyAgilityDisplay">0</span></div>
+                </div>
+            </div>
+
+            <div class="statItem">
+                <div class="statItemHeader"><strong>Mind:</strong> <span id="mindDisplay">0</span></div>
+                <div class="subStatList">
+                    <div class="subStat"><span>Focus</span><span id="mindFocusDisplay">0</span></div>
+                    <div class="subStat"><span>Learning</span><span id="mindLearningDisplay">0</span></div>
+                    <div class="subStat"><span>Discipline</span><span id="mindDisciplineDisplay">0</span></div>
+                </div>
+            </div>
+
+            <div class="statItem">
+                <div class="statItemHeader"><strong>Social:</strong> <span id="socialDisplay">0</span></div>
+                <div class="subStatList">
+                    <div class="subStat"><span>Charisma</span><span id="socialCharismaDisplay">0</span></div>
+                    <div class="subStat"><span>Empathy</span><span id="socialEmpathyDisplay">0</span></div>
+                    <div class="subStat"><span>Teamwork</span><span id="socialTeamworkDisplay">0</span></div>
+                </div>
+            </div>
+
+            <div class="statItem">
+                <div class="statItemHeader"><strong>Wealth:</strong> <span id="wealthDisplay">0</span></div>
+                <div class="subStatList">
+                    <div class="subStat"><span>Saving</span><span id="wealthSavingDisplay">0</span></div>
+                    <div class="subStat"><span>Career</span><span id="wealthCareerDisplay">0</span></div>
+                    <div class="subStat"><span>Investing</span><span id="wealthInvestingDisplay">0</span></div>
+                </div>
+            </div>
+
+            <div class="statItem">
+                <div class="statItemHeader"><strong>Spirit:</strong> <span id="spiritDisplay">0</span></div>
+                <div class="subStatList">
+                    <div class="subStat"><span>Meditation</span><span id="spiritMeditationDisplay">0</span></div>
+                    <div class="subStat"><span>Gratitude</span><span id="spiritGratitudeDisplay">0</span></div>
+                    <div class="subStat"><span>Purpose</span><span id="spiritPurposeDisplay">0</span></div>
+                </div>
+            </div>
+
+            <div class="statItem">
+                <div class="statItemHeader"><strong>Creativity:</strong> <span id="creativityDisplay">0</span></div>
+                <div class="subStatList">
+                    <div class="subStat"><span>Imagination</span><span id="creativityImaginationDisplay">0</span></div>
+                    <div class="subStat"><span>Expression</span><span id="creativityExpressionDisplay">0</span></div>
+                    <div class="subStat"><span>Innovation</span><span id="creativityInnovationDisplay">0</span></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="dailySummary" class="dailySummaryPanel">
+            <h3>DAILY SUMMARY</h3>
+            <ul>
+                <li><strong>Quest streak:</strong> <span id="questStreakDisplay">0 days</span></li>
+                <li><strong>Priority focus:</strong> <span id="priorityFocusDisplay">Complete your next daily quest</span></li>
+                <li><strong>High value quest:</strong> <span id="highPriorityQuestDisplay">None today</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ===================== DAILY QUEST SYSTEM ===================== -->
+    <div id="questPanel">
+        <h2>DAILY QUESTS</h2>
+        <p>Each day brings a fresh set of Hunter missions.</p>
+        <div class="resetRow">
+            <span>Daily reset in: <strong id="dailyResetTimer">--:--:--</strong></span>
+        </div>
+        <div id="dailyQuestList" class="questCategoryGrid"></div>
+    </div>
+<br />
+</div>
+
+<!-- ===================== WEEKLY SYSTEM ===================== -->
+<div id="weeklyPanel">
+    <h2>WEEKLY QUESTS</h2>
+
+    <p>Complete daily missions to level up and rise through the ranks.</p>
+    <div class="resetRow">
+        <span>Weekly reset in: <strong id="weeklyResetTimer">--:--:--</strong></span>
+    </div>
+    <div id="weeklyQuestList"></div>
+</div>
+
+<!-- ===================== HUNTER LOG ===================== -->
+<div id="logPanel">
+    <h2>HUNTER LOG</h2>
+    <p id="logText">The trail is quiet. A brave hunter steps into the mist.</p>
+</div>
+
+<!-- ===================== GAME ENGINE ===================== -->
+<script src="script.js"></script>
+
+</body>
+</html>
