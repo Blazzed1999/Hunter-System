@@ -568,7 +568,9 @@ function initializeCurrentAccount() {
     applyAccountState(state);
 
     // Always rebuild the daily quest list so the current settings are applied.
+    if (!isValidDailyQuestSet(dailyQuestIds)) {
     dailyQuestIds = generateDailyQuestSet();
+}
     if (healthyLifeQuestDate !== getToday() || !healthyLifeQuestIds.length || healthyLifeQuestIds.length !== healthyLifeQuestDailyCount) {
         healthyLifeQuestIds = generateHealthyLifeQuestSet();
         healthyLifeQuestDate = getToday();
@@ -587,7 +589,6 @@ function initializeCurrentAccount() {
     }
 
     if (lastDate !== getToday()) {
-        xp = 0;
         savedQuests = {};
         dailyQuestIds = generateDailyQuestSet();
         lastDate = getToday();
@@ -837,8 +838,11 @@ function addXP(amount) {
 
     while (xp >= getXPThreshold()) {
         xp -= getXPThreshold();
-        level += 1;
+        level++;
     }
+
+    saveAccountState(activeAccountId);
+    updateUI();
 }
 
 function updateWeeklyProgressForQuest(quest, amount) {
@@ -1059,14 +1063,5 @@ function updateWeeklyQuestUI(barId, countId, statusId, current, goal, completed)
 }
 
 function saveData() {
-    localStorage.setItem("xp", xp);
-    localStorage.setItem("level", level);
-    localStorage.setItem("stats", JSON.stringify(stats));
-    localStorage.setItem("substats", JSON.stringify(substats));
-    localStorage.setItem("quests", JSON.stringify(savedQuests));
-    localStorage.setItem("weeklyQuestIds", JSON.stringify(weeklyQuestIds));
-    localStorage.setItem("weeklyProgress", JSON.stringify(weeklyProgress));
-    localStorage.setItem("weeklyRewards", JSON.stringify(weeklyRewards));
-    localStorage.setItem("weeklyWeekKey", getWeekKey());
-    localStorage.setItem("playerName", playerName);
+    saveAccountState(activeAccountId);
 }
